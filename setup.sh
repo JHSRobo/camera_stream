@@ -32,6 +32,10 @@ dpkg -l | grep nmap || apt install nmap -y
 # cuz safety lol but plaintext
 echo -e "JHSRobo\nJHSRobo" | passwd pi
 
+# make the stream run on startup
+rm -rf /etc/rc.local
+mv /home/jhsrobo/camera_stream/rc.local /etc/
+
 # enable cameras
 raspi-config nonint do_camera 0
 
@@ -42,7 +46,4 @@ echo "gpu_mem=256" >> /boot/config.txt
 # turn off the red light. if you leave it on, it reflects off the glass
 echo "disable_camera_led=1" >> /boot/config.txt
 
-# reboot
-echo "sudo bash /home/pi/rpicamera/streamer/startup.sh" >> /etc/rc.local
-echo "#Setup" >> /etc/rc.local
 reboot now
