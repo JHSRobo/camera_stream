@@ -24,14 +24,6 @@ apt update -y
 dpkg -l | grep ncat || apt install ncat -y
 dpkg -l | grep nmap || apt install nmap -y
 
-
-# Safety checks
-# Dont wanna go through that again
-# Assumes that if the device name is pi then it must be a pi0
-# change the password for the pi account
-# cuz safety lol but plaintext
-echo -e "JHSRobo\nJHSRobo" | passwd pi
-
 # make the stream run on startup
 rm -rf /etc/rc.local
 mv /home/jhsrobo/camera_stream/rc.local /etc/
