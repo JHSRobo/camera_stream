@@ -24,7 +24,8 @@ apt update -y
 dpkg -l | grep ncat || apt install ncat -y
 dpkg -l | grep nmap || apt install nmap -y
 
-mv /home/jhsrobo/camera_stream/bootscript /etc/cron.d
+# Make stream.sh launch on startup
+(crontab -l 2>/dev/null || true; echo "*/5 * * * * /home/jhsrobo/camera_stream/stream.sh") | crontab -
 
 # enable cameras
 raspi-config nonint do_legacy 0
