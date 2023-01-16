@@ -25,7 +25,7 @@ dpkg -l | grep ncat || apt install ncat -y
 dpkg -l | grep nmap || apt install nmap -y
 
 # Make stream.sh launch on startup
-crontab -l > crontab_new 
+crontab -l > crontab_new
 echo "@reboot bash /home/jhsrobo/camera_stream/stream.sh" >> crontab_new
 crontab crontab_new
 rm crontab_new
