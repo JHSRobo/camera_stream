@@ -1,0 +1,1 @@
+@reboot bash /home/jhsrobo/camera_stream/stream.sh
