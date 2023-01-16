@@ -29,7 +29,7 @@ rm -rf /etc/rc.local
 mv /home/jhsrobo/camera_stream/rc.local /etc/
 
 # enable cameras
-raspi-config nonint do_camera 0
+raspi-config nonint do_legacy 0
 
 # give more memory
 echo -e "$(sed '/gpu_mem/d' /boot/config.txt)" > /boot/config.txt
