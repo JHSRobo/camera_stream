@@ -10,9 +10,7 @@ fi
 grep -q "Setup" /etc/rc.local || ( echo "Please run setup!" && exit )
 
 # Start up camera streamer
-cd /home/pi/rpicamera/streamer
-
-bash ping.sh &
+bash /home/jhsrobo/camera_stream/ping.sh &
 
 export ROTATION=0
 export WIDTH=1280
