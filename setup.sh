@@ -18,7 +18,7 @@ fi
 
 # Makes sure the PI is up to date. This could cause things to break in the future
 apt update -y
-rpi-update
+rpi-update -y
 
 # Checks if ncat and nmap are installed and then installs them if they are not
 # Needed for the raspivid function to stream the camera
