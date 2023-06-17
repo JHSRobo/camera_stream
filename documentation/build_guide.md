@@ -157,44 +157,39 @@ The following steps will differ greatly depending on your setup. The directions 
 
 12. Next you can put the penetrator on the wire about 8 inches up and glue it with . 
 
-## Vacuum Test the Pi setups
+## 6. Vacuum Test the Pi setups
 
 ***
-  7.1 Put penetrator in the test meh.  
+1. Put penetrator in the test meh.  
 
-  7.2 Pump pressure to 10 and come back and check in 20 min. If the pressure has not dropped then it has passed the vacuum test.
+2. Pump pressure to 10 and come back and check in 20 min. If the pressure has not dropped then it has passed the vacuum test.
 
-  7.3 Then put the camera into a bucket of water and weight it down. Wait about 20 minutes and if there is no leak then it is good. 
+3. Then put the camera into a bucket of water and weight it down. Wait about 20 minutes and if there is no leak then it is good. 
   
-  7.4 Unscrew the penetrator from the test meh. 
+4. Unscrew the penetrator from the test meh. 
 
-## Make the other end of the Camera ethernet cable
+## 7. Make the other end of the Camera ethernet cable
 
-
-***
-  8.1 Solder a two pin JST male adapter the same way that it was soldered on the other side. 
-  8.2 With the other 4 wires solder a 4 pin jst pin male in the same order. 
-
-## Put the cameras in the MEH. 
 
 ***
-  9.1 Unscrew the penetrator on the MEH that is being used. 
-  9.2 Put an O-ring on the new penetrator with some pool lube. 
-  9.3 Put in the camera penetrator into the MEH. Put on a washer and slip on a split nut. 
-  9.4 Screw it on and tighten it with a wrench. 
+1. Solder a two pin JST male adapter the same way that it was soldered on the other side. 
+2. With the other 4 wires solder a 4 pin jst pin male in the same order. 
 
-## Connect ethernet cables to MEH
+## 8. Put the cameras in the MEH. 
 
-10.1 Connect a rj45 adapter to 4pin male jst connector. 
-10.2 Plug it to the ethernet switch
-10.3 Take the 2 pin jst and plug it into the power cable. 
-10.4  Power the rov and test it. 
-10.5 Assemble the MEH back together. 
+***
+1. Unscrew the penetrator on the MEH that is being used. 
+2. Put an O-ring on the new penetrator with some pool lube. 
+3. Put in the camera penetrator into the MEH. Put on a washer and slip on a split nut. 
+4. Screw it on and tighten it with a wrench. 
+
+## 9. Connect ethernet cables to MEH
+***
+
+1. Connect a rj45 adapter to 4pin male jst connector. 
+2. Plug it to the ethernet switch
+3. Take the 2 pin jst and plug it into the power cable. 
+4. Power the rov and test it. 
+5. Assemble the MEH back together. 
+
 DONE!
-
-DOCUMENT TRACKING	DOCUMENT TRACKING	DOCUMENT TRACKING	DOCUMENT TRACKING
-| VERSION |	EDITS COMPLETED BY	| DATE	| DESCRIPTION OF EDIT
-| --- | --- | --- | ---|
-|1.0	|"initial draft -Charlie Kim and Koen | 3/11/23	|initial draft
-|1.1	|" Second draft - Charlie Kim and Koen "|	3/18/23 |	More steps and pics. 
- |1.2	|" tools needed, estimated duration to complete, tags to flag key things to watch for, and ways to check if did the correct."	| 4/3/23
