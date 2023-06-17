@@ -127,15 +127,15 @@ The following steps will differ greatly depending on your setup. The directions 
 
 5. Clean it with denatured alcohol to remove sharp edges and make it look clean.
 
-![Image](./img/IMG_1229.jpg)
+![Image](./img/IMG_1229.JPG)
 
-6. Thread the modified cable through the pvc and plug it into the Pi setup, i.e. the JST connectors and the ethernet hub.
+6. Thread the modified cable through the pvc housing and plug it into the Pi setup, i.e. the JST connectors and the ethernet hub.
 
 7. Fit the 3d printed case inside the pvc. Be careful of knotted wires and damaging them.
 
 8. Use glue to close the gap in the hole. Use pvc cement to attach a turret to the outer pvc, fitted around the ethernet and power wires. 
 
-![Image](./img/IMG_1231.jpg)
+![Image](./img/IMG_1231.JPG)
 
 9.  Clean a lens with an exacto knife.
 
