@@ -130,33 +130,32 @@ The following steps will differ greatly depending on your setup. The directions 
 17. Type “sudo shutdown now” and then watch your Pi and camera’s lights turn off. You can now safely unplug the Pi’s ethernet cable and power cable.
 
 18. Shut off the TCU.
-## Pot Pi setup
+## 5. Pot Pi setup
 
 ***
-  6.1 Screw the camera in first with m2*0.4mm by 8mm long or up to 12mm long nylon screws. *Make sure to find the right sized screw driver as the screws are easy to strip. **if they do not screw in well you may have to tap it. Don't tap completely through the standoffs as they can break. 
+1.  Screw the camera in first with m2*0.4mm by 8mm long or up to 12mm long nylon screws. *Make sure to find the right sized screw driver as the screws are easy to strip. **if they do not screw in well you may have to tap it. Don't tap completely through the standoffs as they can break. 
 
-  6.2 Tap the 3d print to screw in the pi. 
+2. Tap the 3d print to screw in the pi. 
 
-  6.3 Screw in the Pi next and fit the 3d printed housing. 
+3. Screw in the Pi next and fit the 3d printed housing. 
 
-  6.6 Drill a hole in the pvc with the drill mill
+4. Drill a hole in the pvc with the drill mill
 
-  6.4 Then clean it with alcohol. 
+5. Then clean it with alcohol. 
 
-  6.7 Thread the modified cable to the pvc and plug it into the Pi setup
+6. Thread the modified cable to the pvc and plug it into the Pi setup
 
-  6.5 Fit the 3d printed case inside the pvc
+7. Fit the 3d printed case inside the pvc
 
-  6.8 Use glue to close the gap in the hole. Use the pvc cement to attach 
-  the turret to the pvc. 
+8. Use glue to close the gap in the hole. Use the pvc cement to attach the turret to the pvc. 
 
-  6.9 Clean a lens with a exacto knife.
+9. Clean a lens with a exacto knife.
 
-  6.10 Sandpaper the dege lightly
+10. Sandpaper the dege lightly
 
-  6.11 Use goop to seal the lens to the housing. Before adding goop use tape to cover the case. As you are adding goop use the q-tip to make sure the goop gets in the crack. It helps so there are no airbubbles. Smooth with a popsicle stick and make sure there are no holes. Work quickly as it dries fast. 
+11. Use goop to seal the lens to the housing. Before adding goop use tape to cover the case. As you are adding goop use the q-tip to make sure the goop gets in the crack. It helps so there are no airbubbles. Smooth with a popsicle stick and make sure there are no holes. Work quickly as it dries fast. 
 
-  6.12 Next you can put the penetrator on the wire about 8 inches up and glue it with . 
+12. Next you can put the penetrator on the wire about 8 inches up and glue it with . 
 
 ## Vacuum Test the Pi setups
 
