@@ -40,6 +40,7 @@ Builds one camera. It's likely that you will already have most of these parts on
 * [Ethernet Crimper](https://a.co/d/9HOIXPN) (RJ-45 Connectors included)
 * [Flush Cutters](https://a.co/d/iD4LI89)
 * [Solder and soldering iron](https://a.co/d/84wgCcV)
+* Dremmel or file
 
 # Build Guide:
 
@@ -92,12 +93,13 @@ Builds one camera. It's likely that you will already have most of these parts on
 
 1.  Solder right angle 2 pin JST connector to 5v and ground on the Raspberry Pi, OR, use a pigtail cable and solder it correctly to the Pi using the diagram below. Then use sticky tack to stick it to the pi. 
 
+![Image](./img/IMG_1202.png)
+
 2. Connect the pogo board to the Pi zero with the standoffs. 
 
 3. Plug the camera into the zero with the ribbon cable.
 
-![Image](./img/IMG_9429.png)
-
+![Image](./img/IMG_9431.png)
 
 ## 4. Test the Pi setup <a name="Step4"></a>
 
@@ -119,15 +121,21 @@ The following steps will differ greatly depending on your setup. The directions 
 
 3. Screw in the Pi next and fit the 3d printed housing. 
 
+![Image](./img/IMG_1200.png)
+
 4. Drill a hole in the pvc with a drummel or file.
 
 5. Clean it with alcohol to remove sharp edges and make it look clean.
+
+![Image](./img/IMG_1229.jpg)
 
 6. Thread the modified cable through the pvc and plug it into the Pi setup, i.e. the JST connectors and the ethernet hub.
 
 7. Fit the 3d printed case inside the pvc. Be careful of knotted wires and damaging them.
 
 8. Use glue to close the gap in the hole. Use pvc cement to attach a turret to the outer pvc, fitted around the ethernet and power wires. 
+
+![Image](./img/IMG_1231.jpg)
 
 9.  Clean a lens with an exacto knife.
 
@@ -152,4 +160,4 @@ The following steps will differ greatly depending on your setup. The directions 
 2. With the other 4 wires solder a 4 pin jst pin male in the same order as the power JST cable from section 1.
 
 
-DONE!
+# DONE!
