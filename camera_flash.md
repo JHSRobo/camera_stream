@@ -5,14 +5,14 @@ Written by James Randall.
 
 The obvious question here is: "Why not SD Card cloning?"
 
-The answer is a sort of pseudo-superstition. We've corrupted many SD cards trying to perfect this process, so at this point it is faster to just automate the setup with a script or two.
+The answer is a pseudo-superstition. We've corrupted many SD cards trying to perfect this process, so at this point it is faster to just automate the setup with a script or two.
 
-
+***
 
 ## Setup
 1. Flash a micro-SD card using the [Raspberry Pi Imager](https://www.raspberrypi.com/software/) with **Raspbian Bullseye Lite** (32-bit).
 	* Click the settings icon and adjust the settings
-	* Create a user with username jhsrobo and password JHSRobo
+	* Create a user with username jhsrobo and password JHSRobo (Or whatever you want if you aren't from Jesuit)
 	* Enable SSH with Password Authentication
 	* Enable WiFi and configure with appropriate settings
 	* Enable the locale settings
