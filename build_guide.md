@@ -40,13 +40,10 @@ Builds one camera. It's likely that you will already have most of these parts on
 * 1x [Heatshrink](https://a.co/d/i5vroBO)
 
 ## Mechanical Components
-* Camera Housing
-  * 3-D Printed Casing
-  * 3-D Printed Housing
-  * 3-D Printed Lid
 * [Denatured Alcohol](https://a.co/d/iLz6M4C)
 * [Amazing Goop - Silicon Waterproof Sealant](https://a.co/d/d6aWSf7)
 * [USB to JST 5v power plug](https://a.co/d/dwoa4uz)
+* [3/16 in polycarbonate sheet](https://a.co/d/8BiyPUS)
 
 ## Software Components
 
@@ -60,13 +57,15 @@ Builds one camera. It's likely that you will already have most of these parts on
 * [Flush Cutters](https://a.co/d/iD4LI89)
 * [Solder and soldering iron](https://a.co/d/84wgCcV)
 * Dremmel or file
+* Access to a 3D Printer and a CNC
 
 # Build Guide:
 
 ## 1. Flash MicroSD Cards and Print Housings <a name="step1"></a>
 
-1. Check camera_flash.md for info on how to flash a microSD card.\
-2. Take a look at the cad_files folder and print all of the housings to use later on in creating the cameras.
+1. Check [camera_flash.md](camera_flash.md) for info on how to flash a microSD card.
+2. Print [inner_housing.step](cad_files/inner_housing.step) with a 3D printer. PLA will work fine.
+3. With a CNC, create [outer_housing.step](cad_files/outer_housing.step) and [cable_housing.step](cad_files/inner_housing.step) out of PVC
 
 ##  2. Modify Ethernet Cables <a name="step2"></a>
 
