@@ -1,17 +1,33 @@
-# Raspberry Pi Cameras
+![Image](./img/logo.png)
+
+6/17/23 Version 1.0:
+
+**Contributors:** Charlie Kim '25, Koen Miyashiro '25, James Randall '24
+
+**Editors:** Koen Miyashiro '25, James Randall '24
+
+**Approved by:** Tim Monroe '23
+
+---
+
+In 2022, Jesuit Robotics became the first MATE ROV competition participant to stream our ROV video feed live during the product demonstration. The positive feedback we recieved has inspired this repository: It contains all of Jesuit Robotics' documentation, designs, and code for the updated version of the digital camera modules that you saw last year.
+
+This documentation is intended to be read and understood by other highschoolers like us, but these cameras will be effective for any RANGER, PIONEER, or EXPLORER team. If you've got questions, reach out to randallj24@student.jhs.net. Feedback is always welcome, and we'll be pretty quick on any pull requests you've got for us.
+
+ROVOTICS would like to open source most of / all of our designs and software in the future, and this is our first step.
 
 This repository contains the sliver of software that runs on Jesuit Robotics' Cameras, as well as the docs, CAD files, and build guide for their creation. This repository is the first step down a longer path on which Jesuit hopes to open source a majority of its software, hardware, and documentation.
 
-## What is in this repository?
-There are 3 scripts that comprise all the code. They're tiny (~80 lines between all three).
+![Image](./img/exploded_camera.png)
 
-There are also 3 pieces of documentation.
+*Exploded Camera CAD Model*
+
+## What is in this repository?
+There are 3 important documents:
 
 * [build_guide.md](build_guide.md) includes the directions for building our camera modules.
 * [camera_flash.md](camera_flash.md) is like a supplement to build_guide.md with directions for setting up the camera software.
 * [structure.md](structure.md) explains the way that our camera software works and communicates with our camera viewer.
 
-And the .step files for our camera housings in the [cad_files](cad_files)
- folder.
-
-Compiled and edited by James Randall '24 and Koen Miyashiro '25.
+We've also got like all 4 lines of our code that run on these cameras. And the .step files for our camera housings are in the [cad_files](cad_files)
+folder.

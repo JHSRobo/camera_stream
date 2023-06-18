@@ -44,6 +44,7 @@ Builds one camera. It's likely that you will already have most of these parts on
 * [Amazing Goop - Silicon Waterproof Sealant](https://a.co/d/d6aWSf7)
 * [USB to JST 5v power plug](https://a.co/d/dwoa4uz)
 * [3/16 in polycarbonate sheet](https://a.co/d/8BiyPUS)
+* PVC for CNCing
 
 ## Software Components
 
@@ -65,7 +66,7 @@ Builds one camera. It's likely that you will already have most of these parts on
 
 1. Check [camera_flash.md](camera_flash.md) for info on how to flash a microSD card.
 2. Print [inner_housing.step](cad_files/inner_housing.step) with a 3D printer. PLA will work fine.
-3. With a CNC, create [outer_housing.step](cad_files/outer_housing.step) and [cable_housing.step](cad_files/inner_housing.step) out of PVC
+3. With a CNC, create [outer_housing.step](cad_files/outer_housing.step) and [cable_housing.step](cad_files/inner_housing.step) out of PVC, and [window.step](cad_files/window.step) out of Polycarb.
 
 ##  2. Modify Ethernet Cables <a name="step2"></a>
 

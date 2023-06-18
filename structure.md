@@ -4,7 +4,7 @@ Written by James Randall '25
 
 This document outlines the way that Jesuit High School's Robotics team handles camera feed.
 
-TL;DR: On our raspberry pi cameras, we pipe video to port 5000. Our camera viewer software listens for these cameras, and captures the video from the camera's port 5000. See the diagram below. 
+**Too Long; Didn't Read:** On our raspberry pi cameras, we pipe video to port 5000. Our camera viewer software listens for these cameras, and captures the video from the camera's port 5000. See the diagram below. 
 ![Image](./img/camera_diagram.png)
 
 NOTE: Topside refers to anything above the water's surface. There are 4 cameras in the above diagram, but that number can vary depending on implementation.
@@ -13,7 +13,7 @@ NOTE: Topside refers to anything above the water's surface. There are 4 cameras 
 The software that runs on our cameras is microscopic and spartan. The big reason for this is that updating code on these cameras is a hassle. Our cameras do not have internet access, so once the code is on there, it is tough (not impossible, but not fun) to pull new code from GitHub. The cameras constantly broadcast video feed, even when nothing is listening. If the cameras are on, we're streaming. That's the point of this code, and any additional complexity is handled in the camera viewer.
 
 There are 3 scripts:
-* `stream.sh` is a program that runs whenever the pi turns on. It activates `ping.sh`, and streams the output of the RPi Camera to port 5000 on the camera.
+* `stream.sh` is a program that runs whenever the pi turns on. It activates `ping.sh`, and streams the output of the RPi Camera to port 5000 (memorable number, typically available port) on the camera.
   * For example, if the Camera's IP was 192.168.1.100, `stream.sh` would send the video feet to 192.168.1.100:5000
 * `ping.sh` is a program that is run by `stream.sh` , and it's tiny. (The reason that it's a separate program is that we can treat it like a crude form of multithreading). It pings the "Topside IP" indefinitely on port 12345.
 * `setup.sh` is a program that is run manually, once. It edits the crontab to launch `stream.sh` on startup, and configures the Pi for streaming.
