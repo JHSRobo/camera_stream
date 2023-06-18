@@ -1,4 +1,7 @@
 # Raspberry Pi Zero - Digital Camera Overview and Assembly Instructions 2023
+Compiled by Koen Miyashiro '25, Charlie Kim '25
+Edited by Koen Miyashiro '25, James Randall '24
+
 This is the build guide for Jesuit High School's Digital Cameras. It includes the required parts and directions for assembly. This documentation was written entirely by new team members (Koen M and Charlie K), to ensure that no knowledge is taken for granted. Edited by James R, Koen M, and Charlie K.
 
 ## Table of Contents
@@ -11,7 +14,7 @@ This is the build guide for Jesuit High School's Digital Cameras. It includes th
   - [Software Components](#software-components)
   - [Tool Prep:](#tool-prep)
 - [Build Guide:](#build-guide)
-  - [1. Flash MicroSD Cards ](#1-flash-microsd-cards-)
+  - [1. Flash MicroSD Cards and Print Housings ](#1-flash-microsd-cards-and-print-housings-)
   - [2. Modify Ethernet Cables ](#2-modify-ethernet-cables-)
   - [3. Make the other ethernet cable end. ](#3-make-the-other-ethernet-cable-end-)
   - [4. Make Pi setup ](#4-make-pi-setup)

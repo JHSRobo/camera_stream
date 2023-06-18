@@ -1,7 +1,7 @@
 # Cameras
-These are the steps for preparing our Pi Camera SD Cards. It's a part of our larger Software Documentation repository, and it was relevant for the creation of our Pi Cameras, so I excerpted it here.
+Written by James Randall '24
 
-Written by James Randall.
+These are the steps for preparing our Pi Camera SD Cards. It's a part of our larger Software Documentation repository, and it was relevant for the creation of our Pi Cameras, so I excerpted it here.
 
 The obvious question here is: "Why not SD Card cloning?"
 
