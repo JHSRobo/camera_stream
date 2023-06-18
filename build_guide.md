@@ -122,8 +122,8 @@ The following steps will differ greatly depending on your setup. The directions 
 
 2. Connect the other end of the ethernet to your router. Visit the router page (192.168.1.1 for most routers), and find the IP address of the camera.
 
-3. The camera should now be streaming video to port 5000 on that IP address. Test that you can view this video with your camera viewer software. If you want to check out our implementation, see THIS REPOSITORY (ADD LATER BOZO)
-
+3. The camera should now be streaming video to port 5000 on that IP address. Test that you can view this video with your camera viewer software. If you want to check out our implementation, see [this repository](https://github.com/JHSRobo/camera_view)
+  
 4. Cut power to the camera once it has been tested.
 
 ## 6. Pot Pi setup <a name="step6"></a>
