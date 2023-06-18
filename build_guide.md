@@ -84,7 +84,6 @@ Builds one camera. It's likely that you will already have most of these parts on
 
 ![Image](./img/IMG_1223.JPG)
 ![Image](./img/IMG_1226.JPG)
-![Image](./img/IMG_1205.png)
 
 6. Use the multimeter with a pointed object and some alligator clips to test connectivity with the ethernet head. *The ethernet rj45 sometimes does not stick into the wires. Stick the other ends of the ethernet wires into a disassembled wall plug. 
    
