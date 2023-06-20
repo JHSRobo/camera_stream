@@ -20,8 +20,6 @@ This documentation is intended to be read and understood by other highschoolers 
 
 ROVOTICS would like to open source most of / all of our designs and software in the future, and this is our first step.
 
-This repository contains the sliver of software that runs on Jesuit Robotics' Cameras, as well as the docs, CAD files, and build guide for their creation. This repository is the first step down a longer path on which Jesuit hopes to open source a majority of its software, hardware, and documentation.
-
 ![Image](./img/exploded_camera.png)
 
 *Exploded Camera CAD Model*
