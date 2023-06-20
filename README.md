@@ -14,7 +14,7 @@ In 2022, Jesuit Robotics became the first MATE ROV competition participant to st
 The positive feedback we recieved has inspired this repository: 
 It contains all of Jesuit Robotics' documentation, designs, and code for the updated version of the digital camera modules that you saw last year.
 
-[Here's] (https://youtu.be/J15xGUYH15c) the footage of last year's product demo, if you want to check out what our cameras look like.
+[Here's](https://youtu.be/J15xGUYH15c) the footage of last year's product demo, if you want to check out what our cameras look like.
 
 This documentation is intended to be read and understood by other highschoolers like us, but these cameras will be effective for any RANGER, PIONEER, or EXPLORER team. If you've got questions, reach out to randallj24@student.jhs.net. Feedback is always welcome, and we'll be pretty quick on any pull requests you've got for us.
 
