@@ -11,7 +11,7 @@
 ---
 
 In 2022, Jesuit Robotics became the first MATE ROV competition participant to stream our ROV video feed live during the product demonstration. 
-The positive feedback we recieved has inspired this repository: 
+The positive feedback we received has inspired this repository: 
 It contains all of Jesuit Robotics' documentation, designs, and code for the updated version of the digital camera modules that you saw last year.
 
 [Here's](https://youtu.be/J15xGUYH15c) the footage of last year's product demo, if you want to check out what our cameras look like.
