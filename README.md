@@ -15,6 +15,7 @@ The positive feedback we received has inspired this repository:
 It contains all of Jesuit Robotics' documentation, designs, and code for the updated version of the digital camera modules that you saw last year.
 
 [Here's](https://youtu.be/J15xGUYH15c) the footage of last year's product demo, if you want to check out what our cameras look like.
+And [here's](https://sketchfab.com/3d-models/mate-rov-competition-coral-head-d6b4fa1a60984ef59b338a35339d08f6) our rendition of the Coral Head Photogrammetry task from 2022-2023 taken with these cameras.
 
 This documentation is intended to be read and understood by other highschoolers like us, but these cameras will be effective for any RANGER, PIONEER, or EXPLORER team. If you've got questions, reach out to randallj24@student.jhs.net. Feedback is always welcome, and we'll be pretty quick on any pull requests you've got for us.
 
