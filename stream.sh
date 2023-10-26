@@ -7,8 +7,8 @@ if [[ "$(id -u)" != 0 ]]
   exit
 fi
 
-# grep -q "Setup" /etc/rc.local || ( echo "Please run setup!" && exit )
-# raspi-config nonint do_legacy 0
+grep -q "Setup" /etc/rc.local || ( echo "Please run setup!" && exit )
+raspi-config nonint do_legacy 0
 
 # Start up camera streamer
 bash /home/jhsrobo/camera_stream/ping.sh &
