@@ -32,7 +32,7 @@ crontab crontab_new
 rm crontab_new
 
 # enable cameras
-# raspi-config nonint do_legacy 0
+raspi-config nonint do_legacy 0
 
 # give more memory
 echo -e "$(sed '/gpu_mem/d' /boot/config.txt)" > /boot/config.txt
