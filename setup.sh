@@ -9,7 +9,7 @@ if [[ "$(id -u)" != 0 ]]
 fi
 
 # Pings google. if google breaks, we don't have access to start a new camera, sorry. Needs the internet and
-# this was the best way I could think of. If you have a better way to for it
+# this was the best way I could think of. If you have a better way go for it
 # TODO
 if [[ "$(echo -e "GET http://google.com HTTP/1.0\n\n" | nc google.com 80 > /dev/null 2>&1)" == 0 ]]; then
     echo "Please connect to the internet to install libraries"
