@@ -14,9 +14,8 @@ grep -q "Setup" /etc/rc.local || ( echo "Please run setup!" && exit )
 bash /home/jhsrobo/camera_stream/ping.sh &
 
 #export ROTATION=0
-export WIDTH=1280
-export HEIGHT=720
-export FPS=45
+export WIDTH=1440
+export HEIGHT=810
+export FPS=50
 
-# raspivid -n -cd MJPEG -awb auto -ifx none -b 25000000 -br 60 -t 0 -rot ${ROTATION} -w ${WIDTH} -h ${HEIGHT} -fps ${FPS} -o - | ncat -lkv4 5000
-libcamera-vid --framerate ${FPS} --width ${WIDTH} --height ${HEIGHT} -t 0 --codec mjpeg -o - | ncat -lkv4 5000
+libcamera-vid --framerate ${FPS} --width ${WIDTH} --height ${HEIGHT} -t 0 --codec mjpeg --inline --listen -o - | ncat -lkv4 5000
