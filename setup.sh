@@ -32,7 +32,7 @@ rm crontab_new
 
 # give more memory
 echo -e "$(sed '/gpu_mem/d' /boot/config.txt)" > /boot/config.txt
-echo "gpu_mem=256" >> /boot/config.txt
+echo "gpu_mem=128" >> /boot/config.txt
 
 # increase max framebuffers
 echo -e "$(sed '/max_framebuffers/d' /boot/config.txt)" > /boot/config.txt
