@@ -37,6 +37,7 @@ echo "gpu_mem=128" >> /boot/config.txt
 # increase max framebuffers
 echo -e "$(sed '/max_framebuffers/d' /boot/config.txt)" > /boot/config.txt
 echo "max_framebuffers=4" >> /boot/config.txt
+echo "camera_auto_detect=1" >> /boot/config.txt
 
 # set dtoverlay
 echo -e "$(sed '/dtoverlay/d' /boot/config.txt)" > /boot/config.txt
