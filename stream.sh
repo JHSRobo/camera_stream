@@ -7,8 +7,6 @@ if [[ "$(id -u)" != 0 ]]
   exit
 fi
 
-grep -q "Setup" /etc/rc.local || ( echo "Please run setup!" && exit )
-
 # Start up camera streamer
 bash /home/jhsrobo/camera_stream/ping.sh &
 
@@ -20,4 +18,4 @@ export FPS=50
 # Get the last 3 digits of the IP
 export PORT=5$(hostname -I | cut -f1 -d' ' | cut -c 11-13)
 
-libcamera-vid --framerate ${FPS} --width ${WIDTH} --height ${HEIGHT} -t 0 --codec mjpeg --inline --listen -o udp://192.168.1.100:${PORT}
+libcamera-vid --framerate ${FPS} --width ${WIDTH} --height ${HEIGHT} -t 0 --codec mjpeg --inline --listen -o udp://192.168.1.100:5${PORT}
