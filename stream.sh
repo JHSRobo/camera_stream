@@ -2,6 +2,9 @@
 
 # Script to be run at EVERY boot
 
+# Give camera time to initialize
+sleep 10
+
 if [[ "$(id -u)" != 0 ]]
   then echo "Please run as root"
   exit
