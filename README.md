@@ -1,4 +1,4 @@
-[Image](./img/logo.png)
+![Image](./img/logo.png)
 
 10/24/24 Version 1.0:
 
@@ -33,10 +33,16 @@ Enter the new directory
 cd camera_stream
 ~~~
 In this directory, ROVOTICS keeps three files.
+
 The file ping.sh contains IP addresses that the Pi will stream to. These addresses can be configured to whatever IP you want to use for your own implementation. 
+
 The stream.sh file is used to stream the camera footage to the IPs specified in the ping.sh file. 
+
 Finally, the setup.sh installs some neccesary dependencies and uses crontab to automatically run stream.sh on startup so that there is no need to manually run any file on the camera after the intiial setup. 
-Before running any files, you need to specify what camera module you're planning to run.If you are running the default raspberry pi camera module 3 wide, there is no need to configure anything. Otherwise, if you're running an arducam, you should alter your /boot/config.txt file to suit your camera according to the [official documentation](https://docs.arducam.com/Raspberry-Pi-Camera/Native-camera/5MP-OV5647/#selection-guide).
+
+Before running any files, you need to specify what camera module you're planning to run.If you are running the default raspberry pi camera module 3 wide, there is no need to configure anything. 
+Otherwise, if you're running an arducam, you should alter your /boot/config.txt file to suit your camera according to the [official documentation](https://docs.arducam.com/Raspberry-Pi-Camera/Native-camera/5MP-OV5647/#selection-guide).
+
 Finally, run the setup script by running the following bash command.
 ~~~bash
 sudo bash setup.sh
