@@ -16,5 +16,6 @@ bash /home/jhsrobo/camera_stream/ping.sh &
 export WIDTH=1440
 export HEIGHT=810
 export FPS=45
+export PORT=50$(hostname -I | cut -f1 -d' ' | cut -c 12-13)
 
-libcamera-vid --framerate ${FPS} --width ${WIDTH} --height ${HEIGHT} --rotation 180 --codec mjpeg --inline 1 -g 1 -t 0 --listen -o - | ncat -lkv4 5000
+libcamera-vid --framerate ${FPS} --width ${WIDTH} --height ${HEIGHT} --rotation 180 --codec mjpeg --inline 1 -g 1 -t 0 -o - | ncat -uv4 ${PORT}
