@@ -18,4 +18,4 @@ export HEIGHT=810
 export FPS=45
 export PORT=50$(hostname -I | cut -f1 -d' ' | cut -c 12-13)
 
-libcamera-vid --framerate ${FPS} --width ${WIDTH} --height ${HEIGHT} --rotation 180 --codec mjpeg --inline 1 -g 1 -t 0 -o - | ncat -uv4 ${PORT}
+libcamera-vid --framerate ${FPS} --width ${WIDTH} --height ${HEIGHT} --rotation 180 --inline 1 -g 1 -t 0 -o udp://192.168.88.100:${PORT}
