@@ -14,7 +14,7 @@ This repository contains the software used to stream camera data from a Raspberr
 This documentation is intended to be read and understood by other highschoolers like us, but this module will be effective for any RANGER, PIONEER, or EXPLORER team, or just anyone trying to build a low-cost ROV. If you've got questions, reach out to fringsj26@student.jhs.net. Feedback is always welcome.
 
 ## Setting up the Pi
-When setting up the camera, flash a SD card with Bullseye 32 Bit Lite. To flash the SD card, we reccomend downloading the [RPi Imager](https://www.raspberrypi.com/software/). After downloading the imager, plug the SD card into your computer and select the neccesary options. When you are given the option to edit settings, make sure to allow for a ssh connection.
+When setting up the camera, flash a SD card with Bookworm 32 Bit Lite. To flash the SD card, we reccomend downloading the [RPi Imager](https://www.raspberrypi.com/software/). After downloading the imager, plug the SD card into your computer and select the neccesary options. When you are given the option to edit settings, make sure to allow for a ssh connection.
 
 After flashing the SD, you can connect to the Pi over WiFi. However, this guide will access the Pi over our [ethernet hat](https://www.waveshare.com/eth-usb-hub-hat-b.htm). Identify the Pi on your router page and then ssh into the Pi to begin camera setup.
 
