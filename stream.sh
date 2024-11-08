@@ -17,4 +17,4 @@ export WIDTH=1440
 export HEIGHT=810
 export FPS=45
 
-libcamera-vid --framerate ${FPS} --width ${WIDTH} --height ${HEIGHT} --rotation 180 --codec mjpeg --inline 1 -g 1 -t 0 --listen -o - | ncat -lkv4 5000
+libcamera-vid --framerate ${FPS} --width ${WIDTH} --height ${HEIGHT} --codec mjpeg --inline 1 -g 1 -t 0 --listen -o - | ncat -lkv4 5000
