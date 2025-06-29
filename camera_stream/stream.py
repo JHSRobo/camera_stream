@@ -1,8 +1,10 @@
 import rclpy 
 from rclpy.node import Node 
-import glob 
 import cv2 
-import time
+import subprocess
+from launch import LaunchService
+from launch_ros.actions import Node as LaunchNode 
+from launch import LaunchDescription 
 
 class CameraStreamerNode(Node):
     def __init__(self):
@@ -10,25 +12,51 @@ class CameraStreamerNode(Node):
 
         self.log = self.get_logger()
 
-        self.cameras = {}
-
+        # Find cameras 
+        self.cameras = []
         self.find_cameras()
-        self.log.info(str(self.cameras))
+        self.log.info(f"Acquired cameras at indexes {self.cameras}")  
 
+        launch_service = LaunchService()
+        launch_service.include_launch_description(self.generate_launch_description())
+        launch_service.run()
+
+    # This code is kind of jank but I'm pretty sure it'll work with any usb cams. 
+    # The v4l2-ctl --list-devices command lists out all camera devices followed by a list of their corresponding /dev files.
+    # The first /dev file following the camera should always be where the camera feed of the preceding device is published to 
+    # so the following code just remembers which /dev files come immediately over a device connected over usb (which should always be a camera).
     def find_cameras(self):
-        for path in glob.glob("/dev/video*"):
-            i = int(path.strip("/dev/video/"))
-            try:
-                video = cv2.VideoCapture(i, cv2.CAP_V4L2) 
-                time.sleep(0.1)
+        cmd = ["v4l2-ctl", "--list-devices"]
+        output = subprocess.check_output(cmd, text=True)
+        output = list(output.split("\n"))
+        output = list(line.strip("\t") for line in output)
 
-                if video is None or not video.isOpened():
-                    continue 
-                ret, frame = video.read()
-                video.release()
+        for i, line in enumerate(output):
+            if "usb" in line:
+                cam_index = int(output[i+1].strip("/dev/video"))
+                self.cameras.append(cam_index)
 
-                if ret:
-                    self.cameras[i] = path
+
+    def generate_launch_description(self):
+        launch_nodes = []
+        for camera in self.cameras:
+            path = "/dev/video" + str(camera)
+            topic_name = "cam" + str(camera)
+            launch_nodes.append(
+                LaunchNode(
+                    package="usb_cam",
+                    executable="usb_cam_node_exe",
+                    namespace=topic_name,
+                    parameters=[{
+                        "video_device": path,
+                        "image_width": 1920,
+                        "image_height": 1080,
+                        "framerate": 30,
+                        "pixel_format": "mjpg"
+                    }]
+                )
+            )
+        return LaunchDescription(launch_nodes)
 
 def main(args=None):
     rclpy.init(args=args)
