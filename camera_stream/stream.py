@@ -51,8 +51,8 @@ class CameraStreamerNode(Node):
                         "video_device": path,
                         "image_width": 1920,
                         "image_height": 1080,
-                        "framerate": 30,
-                        "pixel_format": "mjpg"
+                        "framerate": 30.0,
+                        "pixel_format": "raw_mjpeg"
                     }]
                 )
             )
