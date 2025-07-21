@@ -19,10 +19,13 @@ class CameraStreamerNode(Node):
         # Camera Settings as Parameters 
         with open("/home/jhsrobo/corews/src/camera_stream/settings.toml", "r") as f:
             self.settings = toml.load(f)
+            self.log.info(f"Loaded Camera Settings: {self.settings}")
 
+        # Parameter to determine whether to save new camera settings to settings.toml at the end of the program
         self.save_changes_on_shutdown = False 
         self.declare_parameter("save_changes_on_shutdown", self.save_changes_on_shutdown)
 
+        # Camera Settings Parameters
         self.add_bounded_parameter("brightness", self.settings["brightness"], -64, 64, 1)
         self.add_bounded_parameter("contrast", self.settings["contrast"], 0, 95, 1)
         self.add_bounded_parameter("saturation", self.settings["saturation"], 0, 255, 1)
@@ -93,6 +96,7 @@ class CameraStreamerNode(Node):
                 # Create a new process that streams this cameras and disables the logging of that process 
                 # If you're having issues, remove the stdout and stderr flags
                 subprocess.Popen([*self.ustreamer_cmd, device_flag, port_flag], stdout=subprocess.DEVNULL, stderr=subprocess.DEVNULL)
+                self.log.info(f"Streaming camera at device {dev} to port {self.port}")
 
                 self.port += 1
 
