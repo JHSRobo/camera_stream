@@ -2,6 +2,7 @@ import rclpy
 from rclpy.node import Node 
 from rcl_interfaces.msg import ParameterDescriptor, IntegerRange, SetParametersResult
 import socket 
+import toml
 import subprocess
 
 class CameraStreamerNode(Node):
@@ -16,16 +17,20 @@ class CameraStreamerNode(Node):
         ip = "192.168.88.111"
 
         # Camera Settings as Parameters 
-        self.camera_params = {}
+        with open("/home/jhsrobo/corews/src/camera_stream/settings.toml", "r") as f:
+            self.settings = toml.load(f)
 
-        self.add_bounded_parameter("brightness", 20, -64, 64, 1)
-        self.add_bounded_parameter("contrast", 0, 0, 95, 1)
-        self.add_bounded_parameter("saturation", 70, 0, 255, 1)
-        self.add_bounded_parameter("hue", 0, -2000, 2000, 1)
-        self.add_bounded_parameter("gamma", 110, 64, 300, 1)
-        self.add_bounded_parameter("gain", 110, 0, 255, 1)
-        self.add_bounded_parameter("sharpness", 2, 0, 7, 1)
-        self.add_bounded_parameter("backlight_compensation", 80, 0, 100, 1)
+        self.save_changes_on_shutdown = False 
+        self.declare_parameter("save_changes_on_shutdown", self.save_changes_on_shutdown)
+
+        self.add_bounded_parameter("brightness", self.settings["brightness"], -64, 64, 1)
+        self.add_bounded_parameter("contrast", self.settings["contrast"], 0, 95, 1)
+        self.add_bounded_parameter("saturation", self.settings["saturation"], 0, 255, 1)
+        self.add_bounded_parameter("hue", self.settings["hue"], -2000, 2000, 1)
+        self.add_bounded_parameter("gamma", self.settings["gamma"], 64, 300, 1)
+        self.add_bounded_parameter("gain", self.settings["gain"], 0, 255, 1)
+        self.add_bounded_parameter("sharpness", self.settings["sharpness"], 0, 7, 1)
+        self.add_bounded_parameter("backlight_compensation", self.settings["backlight_compensation"], 0, 100, 1)
 
 
         # Camera Streaming Command
@@ -47,16 +52,20 @@ class CameraStreamerNode(Node):
         bounds.to_value = to_val 
         bounds.step = step 
         descriptor = ParameterDescriptor(integer_range = [bounds])
-        self.camera_params[name] = cur_val
-        self.declare_parameter(name, self.camera_params[name], descriptor)
+        self.settings[name] = cur_val
+        self.declare_parameter(name, self.settings[name], descriptor)
 
 
+    # params is a list of param objects that contain a name, value, and data type
     def update_parameters(self, params):
         for param in params:
-            self.camera_params[param.name] = param.value 
-            for dev in self.cameras:
-                cmd = ["v4l2-ctl", f"--device={dev}", "--set-ctrl", f"{param.name}={self.camera_params[param.name]}"] 
-                subprocess.run(cmd, stdout=subprocess.DEVNULL, stderr=subprocess.DEVNULL)
+            if param.name == "save_changes_on_shutdown":
+                self.save_changes_on_shutdown = param.value 
+            else:
+                self.settings[param.name] = param.value 
+                for dev in self.cameras:
+                    cmd = ["v4l2-ctl", f"--device={dev}", "--set-ctrl", f"{param.name}={self.settings[param.name]}"] 
+                    subprocess.run(cmd, stdout=subprocess.DEVNULL, stderr=subprocess.DEVNULL)
 
         return SetParametersResult(successful=True)
 
@@ -87,10 +96,16 @@ class CameraStreamerNode(Node):
 
                 self.port += 1
 
+    def write_to_config(self):
+        if self.save_changes_on_shutdown:
+            with open("settings.toml", "w") as f:
+                toml.dump(self.settings, f)
+
 def main(args=None):
     rclpy.init(args=args)
     camera_stream_node = CameraStreamerNode()
-    rclpy.spin(camera_stream_node)
+    try: rclpy.spin(camera_stream_node)
+    except KeyboardInterrupt: camera_stream_node.write_to_config()
     camera_stream_node.destroy_node()
     rclpy.shutdown()
 

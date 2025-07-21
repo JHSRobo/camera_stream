@@ -13,9 +13,7 @@
   <test_depend>python3-pytest</test_depend>
 
   <depend>rclpy</depend>
-  <depend>launch</depend>
-  <depend>launch_ros</depend>
-  <depend>usb_cam</depend>
+  <depend>python3-toml</depend>
 
   <export>
     <build_type>ament_python</build_type>
