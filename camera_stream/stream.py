@@ -14,18 +14,18 @@ class CameraStreamerNode(Node):
         # Some code to quickly grab the current RPi's ip address
         hostname = socket.gethostname()
         ip = socket.gethostbyname(hostname)
-        ip = "192.168.88.110"
 
-        # Camera Settings as Parameters 
-        with open("/home/jhsrobo/corews/src/camera_stream/settings.toml", "r") as f:
+        # Load saved camera settings from settings.toml
+        self.config_path = "/home/jhsrobo/corews/src/camera_stream/settings.toml"
+        with open(self.config_path, "r") as f:
             self.settings = toml.load(f)
             self.log.info(f"Loaded Camera Settings: {self.settings}")
 
-        # Parameter to determine whether to save new camera settings to settings.toml at the end of the program
+        # Parameter to determine whether to save new camera settings to settings.toml at the end of program execution
         self.save_changes_on_shutdown = False 
         self.declare_parameter("save_changes_on_shutdown", self.save_changes_on_shutdown)
 
-        # Camera Settings Parameters
+        # Make ros parameters for each camera setting
         self.add_bounded_parameter("brightness", self.settings["brightness"], -64, 64, 1)
         self.add_bounded_parameter("contrast", self.settings["contrast"], 0, 95, 1)
         self.add_bounded_parameter("saturation", self.settings["saturation"], 0, 255, 1)
@@ -46,35 +46,43 @@ class CameraStreamerNode(Node):
         self.cameras = []
         self.find_cameras()
 
+        # This callback is only ran when a parameter is changed
         self.add_on_set_parameters_callback(self.update_parameters)
 
-
+    # Function to quickly declare a camera setting as a ros parameter and store the setting in self.settings
     def add_bounded_parameter(self, name, cur_val, from_val, to_val, step):
+        self.settings[name] = cur_val
+
         bounds = IntegerRange()
+
         bounds.from_value = from_val 
         bounds.to_value = to_val 
         bounds.step = step 
+
         descriptor = ParameterDescriptor(integer_range = [bounds])
-        self.settings[name] = cur_val
         self.declare_parameter(name, self.settings[name], descriptor)
 
+    # Interface with a given camera to change a single setting
     def set_setting(self, dev, name):
         cmd = ["v4l2-ctl", f"--device={dev}", "--set-ctrl", f"{name}={self.settings[name]}"] 
         subprocess.run(cmd, stdout=subprocess.DEVNULL, stderr=subprocess.DEVNULL)
 
+    # Interface with a given camera to change all settings
     def set_all_settings(self, dev):
         cmd = ["v4l2-ctl", f"--device={dev}", "--set-ctrl"] 
+
+        # settings_changes is a string that contains all of the settings changes separated by commas
         settings_changes = ""
         for key in self.settings.keys():
             settings_changes += f"{key}={self.settings[key]},"
-        settings_changes = settings_changes[:-1]
+
+        settings_changes = settings_changes[:-1] # remove the last unnecesary comma
+
         cmd.append(settings_changes)
         subprocess.run(cmd, stdout=subprocess.DEVNULL, stderr=subprocess.DEVNULL)
 
-
-
-
     # params is a list of param objects that contain a name, value, and data type
+    # params only contains param objects of parameters that have been changed
     def update_parameters(self, params):
         for param in params:
             if param.name == "save_changes_on_shutdown":
@@ -114,19 +122,23 @@ class CameraStreamerNode(Node):
 
                 self.port += 1
 
+        # Configures all cameras with saved settings after initializing the camera feeds
         for dev in self.cameras:
             self.set_all_settings(dev)
 
+    # Save new settings to the toml file is selected
     def write_to_config(self):
         if self.save_changes_on_shutdown:
-            with open("settings.toml", "w") as f:
+            with open(self.config_path, "w") as f:
                 toml.dump(self.settings, f)
 
 def main(args=None):
     rclpy.init(args=args)
     camera_stream_node = CameraStreamerNode()
+
     try: rclpy.spin(camera_stream_node)
-    except KeyboardInterrupt: camera_stream_node.write_to_config()
+    except KeyboardInterrupt: camera_stream_node.write_to_config() # save changes to the toml on shutdown
+
     camera_stream_node.destroy_node()
     rclpy.shutdown()
 
