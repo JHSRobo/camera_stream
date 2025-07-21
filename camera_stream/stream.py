@@ -58,6 +58,21 @@ class CameraStreamerNode(Node):
         self.settings[name] = cur_val
         self.declare_parameter(name, self.settings[name], descriptor)
 
+    def set_setting(self, dev, name):
+        cmd = ["v4l2-ctl", f"--device={dev}", "--set-ctrl", f"{name}={self.settings[name]}"] 
+        subprocess.run(cmd, stdout=subprocess.DEVNULL, stderr=subprocess.DEVNULL)
+
+    def set_all_settings(self, dev):
+        cmd = ["v4l2-ctl", f"--device={dev}", "--set-ctrl"] 
+        settings_changes = ""
+        for key in self.settings.keys():
+            settings_changes += f"{key}={self.settings[key]},"
+        settings_changes = settings_changes[:-1]
+        cmd.append(settings_changes)
+        subprocess.run(cmd, stdout=subprocess.DEVNULL, stderr=subprocess.DEVNULL)
+
+
+
 
     # params is a list of param objects that contain a name, value, and data type
     def update_parameters(self, params):
@@ -67,8 +82,7 @@ class CameraStreamerNode(Node):
             else:
                 self.settings[param.name] = param.value 
                 for dev in self.cameras:
-                    cmd = ["v4l2-ctl", f"--device={dev}", "--set-ctrl", f"{param.name}={self.settings[param.name]}"] 
-                    subprocess.run(cmd, stdout=subprocess.DEVNULL, stderr=subprocess.DEVNULL)
+                    self.set_setting(dev, param.name)
 
         return SetParametersResult(successful=True)
 
@@ -80,11 +94,11 @@ class CameraStreamerNode(Node):
         cmd = ["v4l2-ctl", "--list-devices"]
         output = subprocess.check_output(cmd, text=True)
 
-        # Split the output into a list and remove the tab characters 
+        # Splits the output into a list and remove the tab characters 
         output = list(output.split("\n"))
         output = list(line.strip("\t") for line in output)
 
-        # Read through these lines. When a usb device is a camera, read the next line for that camera's /dev/video file 
+        # Reads through the lines of output. When a usb device is a camera, read the next line for that camera's /dev/video file 
         for i, line in enumerate(output):
             if "camera" in line.lower():
                 dev = output[i+1] 
@@ -99,6 +113,9 @@ class CameraStreamerNode(Node):
                 self.log.info(f"Streaming camera at device {dev} to port {self.port}")
 
                 self.port += 1
+
+        for dev in self.cameras:
+            self.set_all_settings(dev)
 
     def write_to_config(self):
         if self.save_changes_on_shutdown:
