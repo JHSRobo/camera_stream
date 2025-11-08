@@ -1,6 +1,7 @@
 import rclpy 
 from rclpy.node import Node 
 from rcl_interfaces.msg import ParameterDescriptor, IntegerRange, SetParametersResult
+from std_msgs.msg import Int32
 import socket 
 import toml
 import subprocess
@@ -14,6 +15,7 @@ class CameraStreamerNode(Node):
         # Some code to quickly grab the current RPi's ip address
         hostname = socket.gethostname()
         ip = socket.gethostbyname(hostname)
+        ip = "192.168.88.89"
 
         # Load saved camera settings from settings.toml
         self.config_path = "/home/jhsrobo/corews/src/camera_stream/settings.toml"
@@ -37,7 +39,8 @@ class CameraStreamerNode(Node):
 
 
         # Camera Streaming Command
-        self.ustreamer_cmd = ["ustreamer", "--host=" + ip, "--format=MJPEG", "--encoder=HW", "--resolution=1920x1080", "--desired-fps=60", "--buffers=2"]
+        self.ustreamer_cmd = ["ustreamer", "--host=" + ip, "--format=MJPEG", "--encoder=HW", "--resolution=1920x1080", "--desired-fps=30", "--buffers=4", "--workers=4"]
+        self.log.info(str(self.ustreamer_cmd))
 
         # Camera streaming port (which is added later on to the ustreamer command) starts at 5000 and increments by 1
         self.port = 5000
@@ -46,8 +49,17 @@ class CameraStreamerNode(Node):
         self.cameras = []
         self.find_cameras()
 
+        self.camera_count_publisher = self.create_publisher(Int32, 'camera_count', 10)
+
+        self.create_timer(1, self.send_camera_count)
+
         # This callback is only ran when a parameter is changed
         self.add_on_set_parameters_callback(self.update_parameters)
+
+    def send_camera_count(self):
+        msg = Int32()
+        msg.data = len(self.cameras)
+        self.camera_count_publisher.publish(msg)
 
     # Function to quickly declare a camera setting as a ros parameter and store the setting in self.settings
     def add_bounded_parameter(self, name, cur_val, from_val, to_val, step):
@@ -117,8 +129,8 @@ class CameraStreamerNode(Node):
 
                 # Create a new process that streams this cameras and disables the logging of that process 
                 # If you're having issues, remove the stdout and stderr flags
-                subprocess.Popen([*self.ustreamer_cmd, device_flag, port_flag], stdout=subprocess.DEVNULL, stderr=subprocess.DEVNULL)
-                self.log.info(f"Streaming camera at device {dev} to port {self.port}")
+                subprocess.Popen([*self.ustreamer_cmd, device_flag, port_flag])
+                self.log.info(f"Streaming camera {self.port - 4999} at device {dev} to port {self.port}")
 
                 self.port += 1
 
