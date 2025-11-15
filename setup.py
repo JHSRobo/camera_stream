@@ -13,7 +13,7 @@ setup(
     ],
     install_requires=['setuptools'],
     zip_safe=True,
-    maintainer='jhsrobo',
+    maintainer='Jack Frings',
     maintainer_email='jackdfrings@protonmail.com',
     description='TODO: Package description',
     license='TODO: License declaration',

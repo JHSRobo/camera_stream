@@ -15,7 +15,6 @@ class CameraStreamerNode(Node):
         # Some code to quickly grab the current RPi's ip address
         hostname = socket.gethostname()
         ip = socket.gethostbyname(hostname)
-        ip = "192.168.88.89"
 
         # Load saved camera settings from settings.toml
         self.config_path = "/home/jhsrobo/corews/src/camera_stream/settings.toml"
