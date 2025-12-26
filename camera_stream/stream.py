@@ -15,6 +15,7 @@ class CameraStreamerNode(Node):
         # Some code to quickly grab the current RPi's ip address
         hostname = socket.gethostname()
         ip = socket.gethostbyname(hostname)
+        ip = "192.168.88.111"
 
         # Load saved camera settings from settings.toml
         self.config_path = "/home/jhsrobo/corews/src/camera_stream/settings.toml"
@@ -43,6 +44,7 @@ class CameraStreamerNode(Node):
 
         # Camera streaming port (which is added later on to the ustreamer command) starts at 5000 and increments by 1
         self.port = 5000
+        self.stereo_port = 1111
 
         # Look through the available usb devices and start http streams for new camera devices 
         self.cameras = []
@@ -119,19 +121,13 @@ class CameraStreamerNode(Node):
 
         # Reads through the lines of output. When a usb device is a camera, read the next line for that camera's /dev/video file 
         for i, line in enumerate(output):
-            if "camera" in line.lower():
-                dev = output[i+1] 
-                self.cameras.append(dev)
-
-                device_flag = "--device=" + dev
-                port_flag = "--port=" + str(self.port) 
-
-                # Create a new process that streams this cameras and disables the logging of that process 
-                # If you're having issues, remove the stdout and stderr flags
-                subprocess.Popen([*self.ustreamer_cmd, device_flag, port_flag])
-                self.log.info(f"Streaming camera {self.port - 4999} at device {dev} to port {self.port}")
-
-                self.port += 1
+            line = line.lower()
+            if "cam" in line:
+                if "3d" in line:
+                    self.log.info("check")
+                    self.add_camera(output[i+1], True)
+                else:
+                    self.add_camera(output[i+1], False)
 
         # Configures all cameras with saved settings after initializing the camera feeds
         for dev in self.cameras:
@@ -142,6 +138,26 @@ class CameraStreamerNode(Node):
         if self.save_changes_on_shutdown:
             with open(self.config_path, "w") as f:
                 toml.dump(self.settings, f)
+
+    def add_camera(self, dev, stereo):
+        device_flag = "--device=" + dev 
+        if stereo:
+            port_flag = "--port=" + str(self.stereo_port) 
+            # Create a new process that streams this cameras and disables the logging of that process 
+            # If you're having issues, remove the stdout and stderr flags
+            subprocess.Popen([*self.ustreamer_cmd, device_flag, port_flag])
+            self.log.info(f"Streaming stereographic camera {self.stereo_port - 1000} at device {dev} to port {self.stereo_port}")
+
+            self.stereo_port += 1
+        else:
+            port_flag = "--port=" + str(self.port) 
+
+            # Create a new process that streams this cameras and disables the logging of that process 
+            # If you're having issues, remove the stdout and stderr flags
+            subprocess.Popen([*self.ustreamer_cmd, device_flag, port_flag])
+            self.log.info(f"Streaming camera {self.port - 4999} at device {dev} to port {self.port}")
+
+            self.port += 1 
 
 def main(args=None):
     rclpy.init(args=args)
