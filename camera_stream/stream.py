@@ -55,6 +55,14 @@ class CameraStreamerNode(Node):
         # This callback is only ran when a parameter is changed
         self.add_on_set_parameters_callback(self.update_parameters)
 
+    def set_temporary_crop(self):
+        self.settings["crop_x"] = x
+        self.settings["crop_y"] = y
+        self.settings["crop_width"] = w
+        self.settings["crop_height"] = h
+        self.restart_streams()
+
+
     def send_camera_count(self):
         msg = Int32()
         msg.data = len(self.cameras)
