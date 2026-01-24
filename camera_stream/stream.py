@@ -13,8 +13,10 @@ class CameraStreamerNode(Node):
         self.log = self.get_logger()
 
         # Some code to quickly grab the current RPi's ip address
-        hostname = socket.gethostname()
-        ip = socket.gethostbyname(hostname)
+        s = socket.socket(socket.AF_INET, socket.SOCK_DGRAM)
+        s.connect(("8.8.8.8", 80))
+        ip = s.getsockname()[0]
+        s.close()
 
         # Load saved camera settings from settings.toml
         self.config_path = "/home/jhsrobo/corews/src/camera_stream/settings.toml"
@@ -38,7 +40,7 @@ class CameraStreamerNode(Node):
 
 
         # Camera Streaming Command
-        self.ustreamer_cmd = ["ustreamer", "--host=" + ip, "--format=MJPEG", "--encoder=HW", "--resolution=1920x1080", "--desired-fps=30", "--buffers=4", "--workers=4"]
+        self.ustreamer_cmd = ["ustreamer", "--host=" + ip, "--format=MJPEG", "--encoder=HW", "--resolution=1920x1080", "--desired-fps=60", "--buffers=4", "--workers=4"]
         self.log.info(str(self.ustreamer_cmd))
 
         # Camera streaming port (which is added later on to the ustreamer command) starts at 5000 and increments by 1
