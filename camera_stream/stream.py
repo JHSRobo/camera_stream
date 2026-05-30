@@ -49,11 +49,21 @@ class CameraStreamerNode(Node):
         self.cameras = []
         self.active_index = 0
         self.active_process = None
-
-        # Same cached input layout as the viewer: buttons [4, 5, 6, 7, 8]
         self.cached_button_input = [0, 0, 0, 0, 0]
 
         self.find_cameras()
+
+        # Reorder cameras according to camera_order in settings.toml
+        if "camera_order" in self.settings:
+            order = self.settings["camera_order"]
+            try:
+                self.cameras = [self.cameras[i - 1] for i in order]
+                self.log.info(f"Camera order remapped to: {self.cameras}")
+            except IndexError:
+                self.log.warn("camera_order contains an out of range index, using default order")
+        else:
+            self.log.info("No camera_order found, using default order")
+
         if self.cameras:
             self.start_stream(0)
 
@@ -63,7 +73,7 @@ class CameraStreamerNode(Node):
         self.create_subscription(Joy, 'joy', self.joy_callback, 10)
         self.add_on_set_parameters_callback(self.update_parameters)
 
-    # ── Joystick — identical logic to pilot_gui ──────────────────────────────
+    # ── Joystick ─────────────────────────────────────────────────────────────
 
     def joy_callback(self, joy: Joy):
         b = joy.buttons
@@ -152,10 +162,8 @@ class CameraStreamerNode(Node):
 
     def set_all_settings(self, dev):
         settings_changes = ",".join(f"{k}={v}" for k, v in self.settings.items())
-        subprocess.run(
-            ["v4l2-ctl", f"--device={dev}", "--set-ctrl", settings_changes],
-            stdout=subprocess.DEVNULL, stderr=subprocess.DEVNULL
-        )
+        cmd = ["v4l2-ctl", f"--device={dev}", "--set-ctrl", settings_changes]
+        subprocess.run(cmd, stdout=subprocess.DEVNULL, stderr=subprocess.DEVNULL)
 
     def update_parameters(self, params):
         for param in params:

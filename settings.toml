@@ -6,3 +6,5 @@ gamma = 110
 gain = 0
 sharpness = 0
 backlight_compensation = 30
+
+camera_order = [4, 3, 2, 1]
