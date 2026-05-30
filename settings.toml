@@ -5,4 +5,4 @@ hue = 0
 gamma = 110
 gain = 0
 sharpness = 0
-backlight_compensation = 100
+backlight_compensation = 30
