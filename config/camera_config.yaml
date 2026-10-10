@@ -13,5 +13,5 @@ front:
 
   # Configuration
   profile: "PHOTOGRAMMETRY"
-  mode: "default"
+  settings: "default"
 
