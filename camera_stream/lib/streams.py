@@ -37,19 +37,12 @@ class CameraStream(ABC):
         if pipeline is None:
             raise RuntimeError(f"Failed to create pipeline: {self.config.name}")
 
-        source = self._create_source()
-        queue = self._create_leaky_queue()
-        capsfilter = self._create_capsfilter()
-        parser = self._create_parser()
-        payloader = self._create_payloader()
-        sink = self._create_sink()
-
-        elements = [source,
-                    queue,
-                    capsfilter,
-                    parser,
-                    payloader,
-                    sink]
+        elements = [
+            self._create_source(),
+            self._create_queue(),
+            *self._create_codec_elements(),
+            self._create_sink
+        ]
 
         try:
             for element in elements:
@@ -65,22 +58,15 @@ class CameraStream(ABC):
 
         return pipeline
 
-    @staticmethod
-    def _make_element(factory: str, name: str) -> Gst.Element:
-        element = Gst.ElementFactory.make(factory, name)
-
-        if element is None:
-            raise RuntimeError(f"Failed to create Gstreamer element: {factory}.")
-
-        return element
 
     def _create_source(self) -> Gst.Element:
         source = _make_element("v4l2src", "source")
         source.set_property("device", self.config.source)
+        source.set_property("io-mode", "dmabuf")
 
         return source
 
-    def _create_leaky_queue(self) -> Gst.Element:
+    def _create_queue(self) -> Gst.Element:
         queue = _make_element("queue", "queue")
         queue.set_property("max-size-buffers", 1)
         queue.set_property("max-size-bytes", 0)
@@ -90,15 +76,7 @@ class CameraStream(ABC):
         return queue
 
     @abstractmethod
-    def _create_capsfilter(self) -> Gst.Element:
-        pass
-
-    @abstractmethod
-    def _create_parser(self) -> Gst.Element:
-        pass
-
-    @abstractmethod
-    def _create_payloader(self) -> Gst.Element:
+    def _create_codec_elements(self) -> Gst.Element:
         pass
 
     def _create_sink(self):
@@ -110,7 +88,23 @@ class CameraStream(ABC):
 
         return sink
 
+    @staticmethod
+    def _make_element(factory: str, name: str) -> Gst.Element:
+        element = Gst.ElementFactory.make(factory, name)
+
+        if element is None:
+            raise RuntimeError(f"Failed to create Gstreamer element: {factory}.")
+
+        return element
+
 class H264Stream(CameraStream):
+    def _create_codec_elements(self):
+        capsfilter = self._create_capsfilter()
+        parser = self._create_parser()
+        payloader = self._create_payloader()
+
+        return capsfilter, parser, payloader
+
     def _create_capsfilter(self) -> Gst.Element:
         capsfilter = _make_element("capsfilter", "caps")
 
@@ -140,6 +134,13 @@ class H264Stream(CameraStream):
         return payloader
 
 class MJPEGStream(CameraStream):
+    def _create_codec_elements(self):
+        capfilter = self._create_capsfilter()
+        parser = self._create_parser()
+        payloader = self._create_payloader()
+
+        return capsfilter, parser, payloader
+
     def _create_capsfilter(self) -> Gst.Element:
         capsfilter = _make_element("capsfilter", "caps")
 
